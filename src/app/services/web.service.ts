@@ -43,7 +43,6 @@ export class WebService {
     // TODO: implementation
   }
 
-
   /** DELETE task from the server */
   deleteTask(task: Task): void {
     // TODO: implementation
