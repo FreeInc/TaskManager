@@ -12,7 +12,8 @@
 				<app-task *ngIf="isShow(task)" 
 					[currentTask]="task" 
 					(onToggle)="toggleTask($event)"
-					(onRemove)="removeTask($event)">
+					(onRemove)="removeTask($event)"
+					(onUpdate)="updateTask($event)">
 				</app-task> 
 			</li>
 		</ul>

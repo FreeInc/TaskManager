@@ -57,7 +57,7 @@ label {
 	content: '×';
 }
 
-.edit {
+#edit {
 	display: block;
 	width: 513px;
 	padding: 13px 17px 12px 17px;

@@ -54,5 +54,4 @@ export class WebService {
     // TODO: implementation
   }
 
-
 }

@@ -10,10 +10,13 @@ import { Task } from '../../entities/task';
 })
 export class TaskComponent implements OnInit {
 
+  // edit mode for task name on/off
   isEditMode : boolean = false;
 
+  // import task from tasks
   @Input() currentTask: Task;
 
+  // export emitters to the tasks
   @Output() onToggle = new EventEmitter<Task>();
   @Output() onRemove = new EventEmitter<Task>();
   @Output() onUpdate = new EventEmitter<Task>();
@@ -35,20 +38,33 @@ export class TaskComponent implements OnInit {
 
   /** updateTask current task name */
   update(name: string) {
-    console.log(name);
-    // TODO: add implementation
+
+    let value = name.trim();
+
+    if (!value) {
+      console.log('Empty task name');
+    } else if (value === this.currentTask.name) {
+      console.log('Same task name');
+    } else {
+      this.currentTask.name = value;
+    }
+
+    this.onUpdate.emit(this.currentTask);
     this.isEditMode = false;
   }
 
-
-  /** open task name editing mode*/
+  /** open task name edit mode*/
   editTask() {
     this.isEditMode = true;
-    // TODO: focus on current input
-    /*
-    let inputField: HTMLElement = <HTMLElement>document.querySelectorAll('input.edit')[3];
-    console.log(inputField);
-    */
+
+    // focus on input after timeout (for waiting element appearance)
+    setTimeout(this.editInputFocus, 0);
+  }
+
+  /** focus on input for task name editing*/
+  editInputFocus() {
+    let inputEdit: HTMLElement = <HTMLElement>document.getElementById('edit');
+    inputEdit.focus();
   }
 
   /** reset task name editing   */

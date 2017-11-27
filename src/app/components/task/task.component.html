@@ -3,4 +3,4 @@
   <label (dblclick)="editTask()">{{currentTask.name}}</label>
   <button class="destroy" (click)="remove()"></button>
 </div>
-<input *ngIf="isEditMode" class="edit" type="text" [value]="currentTask.name" (keyup.enter)="update(updateTask.value)" (blur)="editReset()" #updateTask/>
+<input *ngIf="isEditMode" id="edit" type="text" autofocus="" [value]="currentTask.name" (keyup.enter)="update(updateTask.value)" (blur)="editReset()" #updateTask/>

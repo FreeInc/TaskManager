@@ -1,5 +1,5 @@
 // angular
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 // services
 import {TaskService} from '../../services/task.service';
@@ -18,7 +18,8 @@ export class TasksComponent implements OnInit {
   get tasks() {
     return this.srv.tasks;
   }
-  
+
+  // filter for show/hide tasks
   filter: string = 'all';
 
   constructor(
@@ -99,6 +100,10 @@ export class TasksComponent implements OnInit {
   /** remove current task */
   removeTask(task: Task) {
     this.srv.removeTask(task);
+  }
+
+  updateTask(task: Task) {
+    this.srv.updateTask(task);
   }
 
   /** remove all completed tasks*/
