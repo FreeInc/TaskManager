@@ -49,8 +49,8 @@ export class TaskService {
 
   /** toggle all tasks property isComplete */
   toggleAllTasks(isCompleted: boolean) {
-  	this.tasks.forEach((task: Task) => task.isCompleted = isCompleted);
-  	this.updateLocalStorage();
+    this.tasks.forEach((task: Task) => task.isCompleted = isCompleted);
+    this.updateLocalStorage();
     // TODO: Work with DB?
   }
 

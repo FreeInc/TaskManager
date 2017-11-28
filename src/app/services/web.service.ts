@@ -34,9 +34,11 @@ export class WebService {
   }
 
   /** POST: add a new task to the server */
+  /*
   addTask(task: Task): Observable<Task> {
     return this.http.post<Task>(tasksUrl, task, httpOptions);
   }
+  */
 
   /** PUT: update task on the server */
   updateTask(task: Task): void {
