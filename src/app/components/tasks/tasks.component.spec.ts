@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {HttpClient, HttpHandler} from '@angular/common/http';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 import { TasksComponent } from './tasks.component';
 import { TaskComponent } from '../task/task.component';
@@ -8,7 +8,7 @@ import { WebService } from '../../services/web.service';
 
 import { Task } from '../../entities/task';
 
-fdescribe('TasklistComponent', () => {
+describe('TasklistComponent', () => {
   let component: TasksComponent;
   let fixture: ComponentFixture<TasksComponent>;
   let taskService: TaskService;
@@ -29,8 +29,13 @@ fdescribe('TasklistComponent', () => {
     fixture.detectChanges();
   });
 
+  xit('injector tests', () => {
+    let taskService2 = fixture.debugElement.injector.get(TaskService);
+    expect(taskService2).toBe(taskService);
+  });
+
   it('call removeTasks', () => {
-    const test = spyOn(taskService, 'removeTasks').and.stub();
+    const test = spyOn(taskService, 'removeTasks');
     component.removeCompletedTasks();
     expect(test).toHaveBeenCalled();
   });
@@ -105,6 +110,5 @@ fdescribe('TasklistComponent', () => {
     component.addTask('  TaskName     ');
     expect(test).toHaveBeenCalledWith(task);
   });
-
 
 });

@@ -1,4 +1,4 @@
-import { TestBed, inject, ComponentFixture } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 
 import { WebService } from './web.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
@@ -7,9 +7,10 @@ import { Task } from '../entities/task';
 
 import { TASKS } from '../entities/storage';
 
-xdescribe('WebService', () => {
+describe('WebService', () => {
 
   let webService: WebService;
+  const task = {name: 'name', isCompleted: false};
 
 
   beforeEach(() => {
@@ -27,17 +28,13 @@ xdescribe('WebService', () => {
   });
 
 
-  // it('should be created', inject([WebService], () => {
-  //   expect(this.webService).toBeTruthy();
-  // }));
-
-/*
   it('call deleteTask with param task', () => {
-    const result = spyOn(webService, 'deleteTask');
-    webService.deleteTask(this.task);
-    expect(result).toHaveBeenCalledWith(this.task);
+    //webService.deleteTask(task); 
+    const spy = spyOn(webService, 'deleteTask');
+    webService.deleteTask(task);
+    expect(spy).toHaveBeenCalledWith(task);
   });
-*/
+
 
   it('call getTasks and return TASKS', () => {
     webService.getTasks().subscribe((data) => {

@@ -8,6 +8,7 @@ import { Task } from '../../entities/task';
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.css']
 })
+
 export class TaskComponent implements OnInit {
 
   // edit mode for task name on/off
@@ -64,7 +65,9 @@ export class TaskComponent implements OnInit {
   /** focus on input for task name editing*/
   editInputFocus() {
     const inputEdit: HTMLElement = <HTMLElement>document.getElementById('edit');
-    inputEdit.focus();
+    if (inputEdit) {
+      inputEdit.focus();
+    }
   }
 
   /** reset task name editing   */

@@ -47,6 +47,7 @@ export class WebService {
 
   /** DELETE task from the server */
   deleteTask(task: Task): void {
+    console.log(task);
     // TODO: implementation
   }
 
