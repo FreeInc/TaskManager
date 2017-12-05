@@ -48,10 +48,10 @@ export class TaskComponent implements OnInit {
       console.log('Same task name');
     } else {
       this.currentTask.name = value;
+      this.onUpdate.emit(this.currentTask);
     }
 
-    this.onUpdate.emit(this.currentTask);
-    this.isEditMode = false;
+    this.editReset();
   }
 
   /** open task name edit mode*/

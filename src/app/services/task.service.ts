@@ -23,7 +23,7 @@ export class TaskService {
   renderAllTasks() {
 
     this.web.getTasks().subscribe((data) => {
-      let localTasks = JSON.parse(localStorage.getItem('taskManager') || '[]');
+      const localTasks = JSON.parse(localStorage.getItem('taskManager') || '[]');
       if (localTasks.length) {
         this.tasks = localTasks;
       } else {

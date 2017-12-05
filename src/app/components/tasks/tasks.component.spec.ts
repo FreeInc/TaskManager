@@ -9,18 +9,18 @@ import { WebService } from '../../services/web.service';
 import { Task } from '../../entities/task';
 
 describe('TasklistComponent', () => {
+
   let component: TasksComponent;
   let fixture: ComponentFixture<TasksComponent>;
   let taskService: TaskService;
   let task: Task;
-
   const completedTask: Task = { name: 'task 1', isCompleted: true };
   const activeTask: Task = { name: 'task 2', isCompleted: false };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ TasksComponent, TaskComponent ],
-      providers: [ TaskService, WebService, HttpClient, HttpHandler]
+      providers: [ TaskService, WebService, HttpClient, HttpHandler ]
     });
 
     taskService = TestBed.get(TaskService);
@@ -29,45 +29,47 @@ describe('TasklistComponent', () => {
     fixture.detectChanges();
   });
 
+  /*
   xit('injector tests', () => {
     let taskService2 = fixture.debugElement.injector.get(TaskService);
     expect(taskService2).toBe(taskService);
   });
+  */
 
   it('call removeTasks', () => {
-    const test = spyOn(taskService, 'removeTasks');
+    const spy = spyOn(taskService, 'removeTasks');
     component.removeCompletedTasks();
-    expect(test).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it('call toggleTask with param task', () => {
-    const test = spyOn(taskService, 'toggleTask');
+    const spy = spyOn(taskService, 'toggleTask');
     component.toggleTask(task);
-    expect(test).toHaveBeenCalledWith(task);
+    expect(spy).toHaveBeenCalledWith(task);
   });
 
   it('call updateTask with param task', () => {
-    const test = spyOn(taskService, 'updateTask');
+    const spy = spyOn(taskService, 'updateTask');
     component.updateTask(task);
-    expect(test).toHaveBeenCalledWith(task);
+    expect(spy).toHaveBeenCalledWith(task);
   });
 
   it('call removeTask with param task', () => {
-    const test = spyOn(taskService, 'removeTask');
+    const spy = spyOn(taskService, 'removeTask');
     component.removeTask(task);
-    expect(test).toHaveBeenCalledWith(task);
+    expect(spy).toHaveBeenCalledWith(task);
   });
 
   it('toggle all tests as completed', () => {
-    const test = spyOn(taskService, 'toggleAllTasks');
+    const spy = spyOn(taskService, 'toggleAllTasks');
     component.toggleAllTasks(true);
-    expect(test).toHaveBeenCalledWith(true);
+    expect(spy).toHaveBeenCalledWith(true);
   });
 
   it('toggle all tests as incompleted', () => {
-    const test = spyOn(taskService, 'toggleAllTasks');
+    const spy = spyOn(taskService, 'toggleAllTasks');
     component.toggleAllTasks(false);
-    expect(test).toHaveBeenCalledWith(false);
+    expect(spy).toHaveBeenCalledWith(false);
   });
 
   it('set filter value equal to "active"', () => {
@@ -99,9 +101,9 @@ describe('TasklistComponent', () => {
   });
 
   it('call addTask with empty name', () => {
-    const test = spyOn(taskService, 'addTask');
+    const spy = spyOn(taskService, 'addTask');
     component.addTask('  ');
-    expect(test).not.toHaveBeenCalled();
+    expect(spy).not.toHaveBeenCalled();
   });
 
   it('call addTask with not empty name', () => {

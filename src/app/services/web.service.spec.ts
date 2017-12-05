@@ -12,6 +12,11 @@ describe('WebService', () => {
   let webService: WebService;
   const task = {name: 'name', isCompleted: false};
 
+  const tasks = [
+    {name: 'name1', isCompleted: false},
+    {name: 'name2', isCompleted: false}
+  ];
+
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -29,12 +34,28 @@ describe('WebService', () => {
 
 
   it('call deleteTask with param task', () => {
-    //webService.deleteTask(task); 
-    const spy = spyOn(webService, 'deleteTask');
+    const spy = spyOn(webService, 'deleteTask').and.callThrough();
     webService.deleteTask(task);
     expect(spy).toHaveBeenCalledWith(task);
   });
 
+  it('call updateTask with param task', () => {
+    const spy = spyOn(webService, 'updateTask').and.callThrough();
+    webService.updateTask(task);
+    expect(spy).toHaveBeenCalledWith(task);
+  });
+
+  it('call addTask with param task', () => {
+    const spy = spyOn(webService, 'addTask').and.callThrough();
+    webService.addTask(task);
+    expect(spy).toHaveBeenCalledWith(task);
+  });
+
+  it('call deleteTasks with param tasks', () => {
+    const spy = spyOn(webService, 'deleteTasks').and.callThrough();
+    webService.deleteTasks(tasks);
+    expect(spy).toHaveBeenCalledWith(tasks);
+  });
 
   it('call getTasks and return TASKS', () => {
     webService.getTasks().subscribe((data) => {

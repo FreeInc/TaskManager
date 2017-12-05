@@ -9,12 +9,12 @@
 		<input class="toggle-all" type="checkbox" (click)="toggleAllTasks(toggleAll.checked)" #toggleAll>
 		<ul class="todo-list">
 			<li *ngFor="let task of tasks">
-				<app-task *ngIf="isShow(task)" 
-					[currentTask]="task" 
+				<app-task *ngIf="isShow(task)"
+					[currentTask]="task"
 					(onToggle)="toggleTask($event)"
 					(onRemove)="removeTask($event)"
 					(onUpdate)="updateTask($event)">
-				</app-task> 
+				</app-task>
 			</li>
 		</ul>
 	</section>
@@ -35,4 +35,4 @@
 		<button class="clear-completed" (click)="removeCompletedTasks()">Delete completed</button>
 	</footer>
 
-</section>  
+</section>
