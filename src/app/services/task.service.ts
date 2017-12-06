@@ -20,7 +20,7 @@ export class TaskService {
   ) {}
 
   /** render task list */
-  renderAllTasks() {
+  renderAllTasks(): void {
 
     this.web.getTasks().subscribe((data) => {
       const localTasks = JSON.parse(localStorage.getItem('taskManager') || '[]');
@@ -34,48 +34,48 @@ export class TaskService {
   }
 
   /** add new task */
-  addTask(task: Task) {
+  addTask(task: Task): void {
     this.tasks.push(task);
     this.updateLocalStorage();
     // TODO: Work with DB?
   }
 
   /** toggle current task property isComplete */
-  toggleTask(task: Task) {
+  toggleTask(task: Task): void {
     task.isCompleted = !task.isCompleted;
     this.updateLocalStorage();
     // TODO: Work with DB?
   }
 
   /** toggle all tasks property isComplete */
-  toggleAllTasks(isCompleted: boolean) {
+  toggleAllTasks(isCompleted: boolean): void {
     this.tasks.forEach((task: Task) => task.isCompleted = isCompleted);
     this.updateLocalStorage();
     // TODO: Work with DB?
   }
 
   /** remove current task */
-  removeTask(removedTask: Task) {
+  removeTask(removedTask: Task): void {
     this.tasks.splice(this.tasks.indexOf(removedTask), 1);
     this.updateLocalStorage();
     // TODO: Work with DB?
   }
 
   /** remove all completed tasks*/
-  removeTasks(removedTasks: Task[]) {
+  removeTasks(removedTasks: Task[]): void {
     removedTasks.forEach((task: Task) => this.removeTask(task));
       this.updateLocalStorage();
     // TODO: Work with DB?
   }
 
   /** edit current task name */
-  updateTask(task: Task) {
+  updateTask(task: Task): void {
     this.updateLocalStorage();
     // TODO: Work with DB?
   }
 
   /** save tasks to localstorage*/
-  updateLocalStorage() {
+  updateLocalStorage(): void {
       localStorage.setItem('taskManager', JSON.stringify(this.tasks));
   }
 

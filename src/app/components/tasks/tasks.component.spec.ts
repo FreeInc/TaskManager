@@ -1,12 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 
 import { TasksComponent } from './tasks.component';
 import { TaskComponent } from '../task/task.component';
 import { TaskService } from '../../services/task.service';
-import { WebService } from '../../services/web.service';
 
 import { Task } from '../../entities/task';
+
+// mocks
+import { TaskServiceMock } from '../../mocks/mock.task.service';
 
 describe('TasklistComponent', () => {
 
@@ -20,8 +22,10 @@ describe('TasklistComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ TasksComponent, TaskComponent ],
-      providers: [ TaskService, WebService, HttpClient, HttpHandler ]
-    });
+      providers: [
+        { provide: TaskService, useClass: TaskServiceMock }
+      ]
+    }).compileComponents();
 
     taskService = TestBed.get(TaskService);
     fixture = TestBed.createComponent(TasksComponent);

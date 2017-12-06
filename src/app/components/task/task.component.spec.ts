@@ -5,8 +5,9 @@ import { TaskComponent } from './task.component';
 import { Task } from '../../entities/task';
 
 import { TaskService } from '../../services/task.service';
-import { WebService } from '../../services/web.service';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+
+// mocks
+import { TaskServiceMock } from '../../mocks/mock.task.service';
 
 
 describe('TaskComponent', () => {
@@ -14,14 +15,15 @@ describe('TaskComponent', () => {
   let component: TaskComponent;
   let fixture: ComponentFixture<TaskComponent>;
   let taskService: TaskService;
-  let webService: WebService;
 
-  const taskInTest: Task = {name: 'testName', isCompleted: false};
+  const taskInTest: Task = { name: 'testName', isCompleted: false };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ TaskComponent ],
-      providers: [ TaskService, WebService, HttpClient, HttpHandler ]
+      providers: [
+        { provide: TaskService, useClass: TaskServiceMock }
+      ]
     }).compileComponents();
   }));
 
@@ -51,6 +53,8 @@ describe('TaskComponent', () => {
     expect(component.isEditMode).toBeTruthy();
   });
 
+
+
   xit('focus on input (#edit) ', () => {
 
     setTimeout(function() {
@@ -79,7 +83,7 @@ describe('TaskComponent', () => {
     //
     // jasmine.clock().tick(0);
     //
-    // expect(inputEdit).toBeTruthy();
+    expect(inputEdit).toBeTruthy();
     // expect(spy).toHaveBeenCalled();
   });
 
