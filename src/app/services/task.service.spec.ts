@@ -1,13 +1,17 @@
-import { TestBed, ComponentFixture, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { TaskService } from './task.service';
 import { WebService } from './web.service';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+
 
 import {Task} from '../entities/task';
 
+// mocks
+import { WebServiceMock } from '../mocks/mock.web.service';
 
 let taskService: TaskService;
+let webService: WebService;
+
 const task: Task = { name: 'task 1', isCompleted: true };
 const tasks = [
   { name: 'task 1', isCompleted: true },
@@ -17,44 +21,69 @@ const tasks = [
 // const completedTask: Task = { name: 'task 1', isCompleted: true };
 // const activeTask: Task = { name: 'task 2', isCompleted: false };
 
-
 describe('TaskService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TaskService, WebService, HttpClient, HttpHandler]
+      providers: [
+        TaskService,
+        { provide: WebService, useClass: WebServiceMock }
+      ]
     });
     taskService = TestBed.get(TaskService);
+    webService = TestBed.get(WebService);
+    taskService.tasks = tasks;
   });
 
-  it('should be created', inject([TaskService], (service: TaskService) => {
-    expect(service).toBeTruthy();
-  }));
+  // TaskService
+  it('TaskService should be created', () => {
+    expect(taskService).toBeTruthy();
+  });
 
-  it('call updateLocalStorage', () => {
-    const spy = spyOn(localStorage, 'setItem');
-    taskService.updateLocalStorage();
+  // renderAllTasks()
+  it('call renderAllTasks() => call WebService.getTasks()', () => {
+    const spy = spyOn(webService, 'getTasks').and.callThrough();
+    taskService.renderAllTasks();
     expect(spy).toHaveBeenCalled();
   });
 
-  it('call updateTask', () => {
+  // TODO: func
+
+
+  // addTask()
+
+  it('call addTask() => call TaskService.updateLocalStorage() ', () => {
     const spy = spyOn(taskService, 'updateLocalStorage');
-    taskService.updateTask(task);
+    taskService.addTask(task);
     expect(spy).toHaveBeenCalled();
   });
 
-  it('call toggleTask', () => {
+  // TODO: func
+
+
+  // toggleTask()
+
+  it('call toggleTask() => call TaskService.updateLocalStorage()', () => {
     const spy = spyOn(taskService, 'updateLocalStorage');
-    const status = task.isCompleted;
     taskService.toggleTask(task);
     expect(spy).toHaveBeenCalled();
+  });
+
+  it('call toggleTask() => toggle task.isCompleted', () => {
+    const status = task.isCompleted;
+    taskService.toggleTask(task);
     expect(status).toBe(!task.isCompleted);
   });
 
-  it('call toggleAllTask with "true"', () => {
-    taskService.tasks = tasks;
+  // toggleAllTasks()
+
+  it('call toggleAllTask() => call TaskService.updateLocalStorage()', () => {
     const spy = spyOn(taskService, 'updateLocalStorage');
     taskService.toggleAllTasks(true);
     expect(spy).toHaveBeenCalled();
+  });
+
+  it('call toggleAllTask(true) => set all tasks isCompleted = true', () => {
+    taskService.toggleAllTasks(true);
     const _tasks =  taskService.tasks.filter((_task: Task) => {
       return _task.isCompleted === true;
     });
@@ -63,32 +92,53 @@ describe('TaskService', () => {
     expect(result).toBeTruthy();
   });
 
-  it('call toggleAllTask with "false"', () => {
-    taskService.tasks = tasks;
-    const spy = spyOn(taskService, 'updateLocalStorage');
+  it('call toggleAllTask(false) => set all tasks isCompleted = false', () => {
     taskService.toggleAllTasks(false);
-    expect(spy).toHaveBeenCalled();
     const _tasks =  taskService.tasks.filter((_task: Task) => {
       return _task.isCompleted === false;
     });
     const result = (_tasks.length === taskService.tasks.length);
-    console.log(result);
     expect(result).toBeTruthy();
   });
 
-  it('call removeTask', () => {
-    taskService.tasks = tasks;
+  // removeTask()
+
+  // TODO: func
+
+  it('call removeTask() => call TaskService.updateLocalStorage() ', () => {
     const spy = spyOn(taskService, 'updateLocalStorage');
     taskService.removeTask(task);
-
-
-    // const status = task.isCompleted;
-    // taskService.toggleTask(task);
     expect(spy).toHaveBeenCalled();
-    // expect(status).toBe(!task.isCompleted);
   });
 
 
+  // removeTasks()
 
+  // TODO: func
+
+  it('call removeTasks() => call TaskService.updateLocalStorage() ', () => {
+    const spy = spyOn(taskService, 'updateLocalStorage');
+    taskService.removeTasks(tasks);
+    expect(spy).toHaveBeenCalled();
+  });
+
+
+  // updateTask()
+
+  // TODO: func
+
+  it('call updateTask() => call TaskService.updateLocalStorage()', () => {
+    const spy = spyOn(taskService, 'updateLocalStorage');
+    taskService.updateTask(task);
+    expect(spy).toHaveBeenCalled();
+  });
+
+  // updateLocalStorage()
+
+  it('call updateLocalStorage() => call localStorage.setItem()', () => {
+    const spy = spyOn(localStorage, 'setItem');
+    taskService.updateLocalStorage();
+    expect(spy).toHaveBeenCalledWith('taskManager', JSON.stringify(tasks));
+  });
 
 });

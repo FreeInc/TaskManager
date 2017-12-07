@@ -21,7 +21,6 @@ export class TaskService {
 
   /** render task list */
   renderAllTasks(): void {
-
     this.web.getTasks().subscribe((data) => {
       const localTasks = JSON.parse(localStorage.getItem('taskManager') || '[]');
       if (localTasks.length) {

@@ -55,36 +55,14 @@ describe('TaskComponent', () => {
 
 
 
-  xit('focus on input (#edit) ', () => {
-
-    setTimeout(function() {
-      component.editTask();
-    }, 1);
-
-    jasmine.clock().tick(100);
-
-    let inputEdit = fixture.debugElement.query(By.css('input#edit'));
-    console.log(inputEdit);
-
-    jasmine.clock().tick(100);
-
-    inputEdit = fixture.debugElement.query(By.css('input#edit'));
-    console.log(inputEdit);
-
-    // const spy = spyOn(inputEdit, 'focus');
-    //
-    // component.editTask();
-    //
-    //
-    // setTimeout(function() {
-    //   component.editTask();
-    // }, 1);
-    //
-    //
-    // jasmine.clock().tick(0);
-    //
+  it('focus on input (#edit) ', () => {
+    component.editTask();
+    fixture.detectChanges();
+    const inputEdit = fixture.debugElement.query(By.css('input#edit')).nativeElement;
+    const spy = spyOn(inputEdit, 'focus').and.callThrough();
+    jasmine.clock().tick(0);
     expect(inputEdit).toBeTruthy();
-    // expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
 
