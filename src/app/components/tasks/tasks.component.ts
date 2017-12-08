@@ -14,13 +14,13 @@ import { Task } from '../../entities/task';
 })
 export class TasksComponent implements OnInit {
 
-  // property ( get tasks from task service ) 
+  // property ( get tasks from task service )
   get tasks() {
     return this.srv.tasks;
   }
 
   // filter for show/hide tasks
-  filter: string = 'all';
+  filter: String = 'all';
 
   constructor(
     private srv: TaskService
@@ -34,8 +34,8 @@ export class TasksComponent implements OnInit {
 
   /** filter tasks by property isCompleted */
   filterTasks(isCompleted: Boolean) {
-		return this.tasks.filter((task: Task) => task.isCompleted === isCompleted);
-	}
+    return this.tasks.filter((task: Task) => task.isCompleted === isCompleted);
+  }
 
   /** isShow */
   isShow(task: Task) {
@@ -51,7 +51,7 @@ export class TasksComponent implements OnInit {
         return task.isCompleted;
 
       default:
-        return alert('WTF??? Where are you get this filter???');  
+        return alert('WTF??? Where are you get this filter???');
     }
   }
 
@@ -75,12 +75,12 @@ export class TasksComponent implements OnInit {
 
   /** add new task */
   addTask(newTaskName: string) {
-    let name = newTaskName.trim();
+    const name = newTaskName.trim();
     if (!name) {
       alert('Input not empty task name!');
       return;
-    } 
-    let task = {
+    }
+    const task = {
       name: name.trim(),
       isCompleted: false
     };
@@ -108,7 +108,7 @@ export class TasksComponent implements OnInit {
 
   /** remove all completed tasks*/
   removeCompletedTasks() {
-    let completedTasks = this.filterTasks(true);
+    const completedTasks = this.filterTasks(true);
     this.srv.removeTasks(completedTasks);
   }
 
