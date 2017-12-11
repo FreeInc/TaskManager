@@ -8,7 +8,8 @@ import {TaskService} from '../../services/task.service';
 import { Task } from '../../entities/task';
 
 import { Store } from '@ngrx/store';
-import { getTasks, addTask, removeTask } from '../../reducers/task.reducer';
+import { ADD_TASK, REMOVE_TASK, REMOVE_TASKS } from '../../reducers/task.reducer';
+// import { getTasks, addTask, removeTask } from '../../reducers/task.reducer';
 
 @Component({
   selector: 'app-tasks',
@@ -16,11 +17,6 @@ import { getTasks, addTask, removeTask } from '../../reducers/task.reducer';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
-
-  // property ( get tasks from task service )
-  // get tasks() {
-  //   return this.srv.tasks;
-  // }
 
   tasks: Task[];
 
@@ -34,9 +30,8 @@ export class TasksComponent implements OnInit {
 
   ngOnInit() {
     // this.srv.renderAllTasks();
-    this.store.dispatch(getTasks());
     this.store.select('tasks').subscribe((res: any) => {
-      this.tasks = res.data;
+      this.tasks = res;
     });
   }
 
@@ -85,6 +80,7 @@ export class TasksComponent implements OnInit {
 
   /** add new task */
   addTask(newTaskName: string) {
+
     const name = newTaskName.trim();
     if (!name) {
       alert('Input not empty task name!');
@@ -94,7 +90,8 @@ export class TasksComponent implements OnInit {
       name: name.trim(),
       isCompleted: false
     };
-    this.srv.addTask(task);
+
+    this.store.dispatch({type: ADD_TASK, payload: task});
   }
 
   /** toggle current task property isCompleted*/
@@ -109,7 +106,7 @@ export class TasksComponent implements OnInit {
 
   /** remove current task */
   removeTask(task: Task) {
-    this.srv.removeTask(task);
+    this.store.dispatch({type: REMOVE_TASK, payload: task});
   }
 
   updateTask(task: Task) {
@@ -119,7 +116,7 @@ export class TasksComponent implements OnInit {
   /** remove all completed tasks*/
   removeCompletedTasks() {
     const completedTasks = this.filterTasks(true);
-    this.srv.removeTasks(completedTasks);
+    this.store.dispatch({type: REMOVE_TASKS, payload: completedTasks});
   }
 
 }

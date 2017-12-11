@@ -15,8 +15,10 @@ import { TaskService } from './services/task.service';
 import { WebService } from './services/web.service';
 import { TaskComponent } from './components/task/task.component';
 
-import { StoreModule } from '../../node_modules/@ngrx/store/src/ng2';
-import reducer from './reducers';
+// @ngrx store
+import { StoreModule } from '@ngrx/store';
+import { tasks } from './reducers/task.reducer';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import reducer from './reducers';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({tasks})
   ],
   providers: [
     TaskService,
