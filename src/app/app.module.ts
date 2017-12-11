@@ -15,6 +15,8 @@ import { TaskService } from './services/task.service';
 import { WebService } from './services/web.service';
 import { TaskComponent } from './components/task/task.component';
 
+import { StoreModule } from '../../node_modules/@ngrx/store/src/ng2';
+import reducer from './reducers';
 
 @NgModule({
   declarations: [

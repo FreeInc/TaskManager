@@ -1,11 +1,14 @@
 // angular
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 // services
 import {TaskService} from '../../services/task.service';
 
 // entities
 import { Task } from '../../entities/task';
+
+import { Store } from '@ngrx/store';
+import { getTasks, addTask, removeTask } from '../../reducers/task.reducer';
 
 @Component({
   selector: 'app-tasks',
@@ -15,19 +18,26 @@ import { Task } from '../../entities/task';
 export class TasksComponent implements OnInit {
 
   // property ( get tasks from task service )
-  get tasks() {
-    return this.srv.tasks;
-  }
+  // get tasks() {
+  //   return this.srv.tasks;
+  // }
+
+  tasks: Task[];
 
   // filter for show/hide tasks
   filter: String = 'all';
 
   constructor(
-    private srv: TaskService
+    private srv: TaskService,
+    private store: Store<any>
   ) { }
 
   ngOnInit() {
-    this.srv.renderAllTasks();
+    // this.srv.renderAllTasks();
+    this.store.dispatch(getTasks());
+    this.store.select('tasks').subscribe((res: any) => {
+      this.tasks = res.data;
+    });
   }
 
   /** VIEW FLOW */

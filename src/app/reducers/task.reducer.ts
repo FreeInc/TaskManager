@@ -1,4 +1,4 @@
-// import { ActionReducer, Action } from '@ngrx/store';
+import { ActionReducer, Action } from '@ngrx/store';
 import { TaskService } from '../services/task.service';
 
 export const GET_TASKS = 'GET_TASKS';
