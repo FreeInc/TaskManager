@@ -9,15 +9,11 @@ import { AppRoutingModule } from './routing.module';
 // components
 import { AppComponent } from './app.component';
 import { TasksComponent } from './components/tasks/tasks.component';
-
-// services
-import { TaskService } from './services/task.service';
-import { WebService } from './services/web.service';
 import { TaskComponent } from './components/task/task.component';
 
 // @ngrx store
 import { StoreModule } from '@ngrx/store';
-import { tasks } from './reducers/task.reducer';
+import { tasks } from './reducers/tasks.reducer';
 
 
 @NgModule({
@@ -32,10 +28,7 @@ import { tasks } from './reducers/task.reducer';
     AppRoutingModule,
     StoreModule.forRoot({tasks})
   ],
-  providers: [
-    TaskService,
-    WebService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

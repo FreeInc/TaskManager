@@ -1,3 +1,4 @@
+// @angular
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 // entities
@@ -11,7 +12,7 @@ import { Task } from '../../entities/task';
 export class TaskComponent implements OnInit {
 
   // edit mode for task name on/off
-  isEditMode : boolean = false;
+  isEditMode: Boolean = false;
 
   // import task from tasks
   @Input() currentTask: Task;
@@ -25,7 +26,7 @@ export class TaskComponent implements OnInit {
 
   ngOnInit() {
   }
- 
+
   /** toggle current task property isCompleted*/
   toggle() {
     this.onToggle.emit(this.currentTask);
@@ -38,9 +39,7 @@ export class TaskComponent implements OnInit {
 
   /** updateTask current task name */
   update(name: string) {
-
-    let value = name.trim();
-
+    const value = name.trim();
     if (!value) {
       console.log('Empty task name');
     } else if (value === this.currentTask.name) {
@@ -48,7 +47,6 @@ export class TaskComponent implements OnInit {
     } else {
       this.currentTask.name = value;
     }
-
     this.onUpdate.emit(this.currentTask);
     this.isEditMode = false;
   }
@@ -56,14 +54,13 @@ export class TaskComponent implements OnInit {
   /** open task name edit mode*/
   editTask() {
     this.isEditMode = true;
-
     // focus on input after timeout (for waiting element appearance)
     setTimeout(this.editInputFocus, 0);
   }
 
   /** focus on input for task name editing*/
   editInputFocus() {
-    let inputEdit: HTMLElement = <HTMLElement>document.getElementById('edit');
+    const inputEdit: HTMLElement = <HTMLElement>document.getElementById('edit');
     inputEdit.focus();
   }
 

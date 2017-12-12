@@ -1,15 +1,13 @@
-// angular
+// @angular
 import { Component, OnInit} from '@angular/core';
-
-// services
-import {TaskService} from '../../services/task.service';
 
 // entities
 import { Task } from '../../entities/task';
 
+// @ngrx store
 import { Store } from '@ngrx/store';
-import { ADD_TASK, REMOVE_TASK, REMOVE_TASKS } from '../../reducers/task.reducer';
-// import { getTasks, addTask, removeTask } from '../../reducers/task.reducer';
+import { ADD_TASK, REMOVE_TASK, REMOVE_TASKS, UPDATE_TASK } from '../../reducers/tasks.reducer';
+
 
 @Component({
   selector: 'app-tasks',
@@ -18,22 +16,23 @@ import { ADD_TASK, REMOVE_TASK, REMOVE_TASKS } from '../../reducers/task.reducer
 })
 export class TasksComponent implements OnInit {
 
+  // list of task
   tasks: Task[];
-
   // filter for show/hide tasks
   filter: String = 'all';
 
+
   constructor(
-    private srv: TaskService,
     private store: Store<any>
-  ) { }
+  ) {}
+
 
   ngOnInit() {
-    // this.srv.renderAllTasks();
-    this.store.select('tasks').subscribe((res: any) => {
-      this.tasks = res;
+    this.store.select('tasks').subscribe((data: any) => {
+      this.tasks = data;
     });
   }
+
 
   /** VIEW FLOW */
 
@@ -96,12 +95,16 @@ export class TasksComponent implements OnInit {
 
   /** toggle current task property isCompleted*/
   toggleTask(task: Task) {
-    this.srv.toggleTask(task);
+    task.isCompleted = !task.isCompleted;
+    this.store.dispatch({type: UPDATE_TASK, payload: task});
   }
 
   /** toggle all tasks property isCompleted */
   toggleAllTasks(isCompleted: boolean) {
-    this.srv.toggleAllTasks(isCompleted);
+    this.tasks.forEach((task: Task) => {
+      task.isCompleted = isCompleted;
+      this.store.dispatch({type: UPDATE_TASK, payload: task});
+    });
   }
 
   /** remove current task */
@@ -109,8 +112,9 @@ export class TasksComponent implements OnInit {
     this.store.dispatch({type: REMOVE_TASK, payload: task});
   }
 
+  /** update current task */
   updateTask(task: Task) {
-    this.srv.updateTask(task);
+    this.store.dispatch({type: UPDATE_TASK, payload: task});
   }
 
   /** remove all completed tasks*/
