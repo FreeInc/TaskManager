@@ -1,0 +1,11 @@
+<div *ngIf="!isEditMode" class="view">
+  <input class="toggle" type="checkbox"
+         (click)="toggle()"
+         [checked]="currentTask.isCompleted">
+  <label (dblclick)="editTask()">{{currentTask.name}}</label>
+  <button class="destroy" (click)="remove()"></button>
+</div>
+<input *ngIf="isEditMode" id="edit" type="text" autofocus="" #updateTask
+       [value]="currentTask.name"
+       (keyup.enter)="update(updateTask.value)"
+       (blur)="editReset()"/>
