@@ -18,8 +18,6 @@ const tasks = [
   { name: 'task 2', isCompleted: false }
 ];
 
-// const completedTask: Task = { name: 'task 1', isCompleted: true };
-// const activeTask: Task = { name: 'task 2', isCompleted: false };
 
 describe('TaskService', () => {
   beforeEach(() => {
@@ -34,22 +32,18 @@ describe('TaskService', () => {
     taskService.tasks = tasks;
   });
 
-  // TaskService
-  it('TaskService should be created', () => {
+  it('should be created', () => {
     expect(taskService).toBeTruthy();
   });
 
-  // renderAllTasks()
   it('call renderAllTasks() => call WebService.getTasks()', () => {
     const spy = spyOn(webService, 'getTasks').and.callThrough();
     taskService.renderAllTasks();
     expect(spy).toHaveBeenCalled();
   });
 
-  // TODO: func
-
-
-  // addTask()
+  it('call renderAllTasks() => get tasks from local storage (if local storage is not empty)');
+  it('call renderAllTasks() => get tasks from web.service (if local storage is empty)');
 
   it('call addTask() => call TaskService.updateLocalStorage() ', () => {
     const spy = spyOn(taskService, 'updateLocalStorage');
@@ -57,10 +51,7 @@ describe('TaskService', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  // TODO: func
-
-
-  // toggleTask()
+  it('call addTask(addedTask) => add addedTask to tasks');
 
   it('call toggleTask() => call TaskService.updateLocalStorage()', () => {
     const spy = spyOn(taskService, 'updateLocalStorage');
@@ -101,20 +92,15 @@ describe('TaskService', () => {
     expect(result).toBeTruthy();
   });
 
-  // removeTask()
+  it('call removeTask(removedTask) => remove removedTask from tasks');
 
-  // TODO: func
-
-  it('call removeTask() => call TaskService.updateLocalStorage() ', () => {
+  it('call removeTask() => call TaskService.updateLocalStorage()', () => {
     const spy = spyOn(taskService, 'updateLocalStorage');
     taskService.removeTask(task);
     expect(spy).toHaveBeenCalled();
   });
 
-
-  // removeTasks()
-
-  // TODO: func
+  it('call removeTasks(removedTasks) => remove removedTasks from tasks');
 
   it('call removeTasks() => call TaskService.updateLocalStorage() ', () => {
     const spy = spyOn(taskService, 'updateLocalStorage');
@@ -122,18 +108,11 @@ describe('TaskService', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-
-  // updateTask()
-
-  // TODO: func
-
   it('call updateTask() => call TaskService.updateLocalStorage()', () => {
     const spy = spyOn(taskService, 'updateLocalStorage');
     taskService.updateTask(task);
     expect(spy).toHaveBeenCalled();
   });
-
-  // updateLocalStorage()
 
   it('call updateLocalStorage() => call localStorage.setItem()', () => {
     const spy = spyOn(localStorage, 'setItem');

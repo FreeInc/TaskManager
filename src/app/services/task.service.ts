@@ -28,7 +28,6 @@ export class TaskService {
       } else {
         this.tasks = data;
       }
-      // TODO: write normal clever business logic
     });
   }
 
@@ -36,46 +35,40 @@ export class TaskService {
   addTask(task: Task): void {
     this.tasks.push(task);
     this.updateLocalStorage();
-    // TODO: Work with DB?
   }
 
   /** toggle current task property isComplete */
   toggleTask(task: Task): void {
     task.isCompleted = !task.isCompleted;
     this.updateLocalStorage();
-    // TODO: Work with DB?
   }
 
   /** toggle all tasks property isComplete */
   toggleAllTasks(isCompleted: boolean): void {
     this.tasks.forEach((task: Task) => task.isCompleted = isCompleted);
     this.updateLocalStorage();
-    // TODO: Work with DB?
   }
 
   /** remove current task */
   removeTask(removedTask: Task): void {
     this.tasks.splice(this.tasks.indexOf(removedTask), 1);
     this.updateLocalStorage();
-    // TODO: Work with DB?
   }
 
   /** remove all completed tasks*/
   removeTasks(removedTasks: Task[]): void {
     removedTasks.forEach((task: Task) => this.removeTask(task));
-      this.updateLocalStorage();
-    // TODO: Work with DB?
+    this.updateLocalStorage();
   }
 
   /** edit current task name */
   updateTask(task: Task): void {
     this.updateLocalStorage();
-    // TODO: Work with DB?
   }
 
-  /** save tasks to localstorage*/
+  /** save tasks to browser local storage*/
   updateLocalStorage(): void {
-      localStorage.setItem('taskManager', JSON.stringify(this.tasks));
+    localStorage.setItem('taskManager', JSON.stringify(this.tasks));
   }
 
 }

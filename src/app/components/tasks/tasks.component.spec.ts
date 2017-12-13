@@ -33,86 +33,99 @@ describe('TasklistComponent', () => {
     fixture.detectChanges();
   });
 
-  /*
-  xit('injector tests', () => {
-    let taskService2 = fixture.debugElement.injector.get(TaskService);
-    expect(taskService2).toBe(taskService);
-  });
-  */
-
-  it('call removeTasks', () => {
+  it('call removeCompletedTasks() => call taskService.removeTasks()', () => {
     const spy = spyOn(taskService, 'removeTasks');
     component.removeCompletedTasks();
     expect(spy).toHaveBeenCalled();
   });
 
-  it('call toggleTask with param task', () => {
+  it('call toggleTask(task) => call taskService.toggleTask(task)', () => {
     const spy = spyOn(taskService, 'toggleTask');
     component.toggleTask(task);
     expect(spy).toHaveBeenCalledWith(task);
   });
 
-  it('call updateTask with param task', () => {
+  it('call updateTask(task) => call taskService.updateTask(task)', () => {
     const spy = spyOn(taskService, 'updateTask');
     component.updateTask(task);
     expect(spy).toHaveBeenCalledWith(task);
   });
 
-  it('call removeTask with param task', () => {
+  it('call removeTask(task) => call taskService.removeTask(task)', () => {
     const spy = spyOn(taskService, 'removeTask');
     component.removeTask(task);
     expect(spy).toHaveBeenCalledWith(task);
   });
 
-  it('toggle all tests as completed', () => {
+  it('call toggleAllTasks(true) => call taskService.toggleAllTasks(true)', () => {
     const spy = spyOn(taskService, 'toggleAllTasks');
     component.toggleAllTasks(true);
     expect(spy).toHaveBeenCalledWith(true);
   });
 
-  it('toggle all tests as incompleted', () => {
+  it('call toggleAllTasks(false) => call taskService.toggleAllTasks(false)', () => {
     const spy = spyOn(taskService, 'toggleAllTasks');
     component.toggleAllTasks(false);
     expect(spy).toHaveBeenCalledWith(false);
   });
 
-  it('set filter value equal to "active"', () => {
+  it('call showActiveTasks() => set filter value equal to "active"', () => {
     component.showActiveTasks();
     const filter = component.filter;
     expect(filter).toBe('active');
+  });
+
+  it('call showActiveTasks() => active task pass the visibility checking', () => {
+    component.showActiveTasks();
     const activeResult = component.isShow(activeTask);
     expect(activeResult).toBe(true);
+  });
+
+  it('call showActiveTasks() => completed task do not pass the visibility checking', () => {
+    component.showActiveTasks();
     const completedResult = component.isShow(completedTask);
     expect(completedResult).toBe(false);
   });
 
-  it('set filter value equal to "completed"', () => {
+  it('call showCompletedTasks() => set filter value equal to "completed"', () => {
     component.showCompletedTasks();
     const filter = component.filter;
     expect(filter).toBe('completed');
-    const activeResult = component.isShow(activeTask);
-    expect(activeResult).toBe(false);
-    const completedResult = component.isShow(completedTask);
-    expect(completedResult).toBe(true);
   });
 
-  it('set filter value equal to "all"', () => {
+  it('call showCompletedTasks() => completed task pass the visibility checking', () => {
+    component.showCompletedTasks();
+    const activeResult = component.isShow(completedTask);
+    expect(activeResult).toBe(true);
+  });
+
+  it('call showCompletedTasks() => active task do not pass the visibility checking', () => {
+    component.showCompletedTasks();
+    const completedResult = component.isShow(activeTask);
+    expect(completedResult).toBe(false);
+  });
+
+  it('call showAllTasks() => set filter value equal to "all"', () => {
     component.showAllTasks();
-    const result = component.isShow(task);
     const filter = component.filter;
     expect(filter).toBe('all');
+  });
+
+  it('call showCompletedTasks() => any task pass the visibility checking', () => {
+    component.showAllTasks();
+    const result = component.isShow(task);
     expect(result).toBeTruthy();
   });
 
-  it('call addTask with empty name', () => {
+  it('call addTask() with empty name => do not call taskService.addTask()', () => {
     const spy = spyOn(taskService, 'addTask');
     component.addTask('  ');
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('call addTask with not empty name', () => {
-    const test = spyOn(taskService, 'addTask');
+  it('call addTask() with empty name => call taskService.addTask(task)', () => {
     task = { name: 'TaskName', isCompleted: false };
+    const test = spyOn(taskService, 'addTask');
     component.addTask('  TaskName     ');
     expect(test).toHaveBeenCalledWith(task);
   });
