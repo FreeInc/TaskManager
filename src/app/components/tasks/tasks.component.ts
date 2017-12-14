@@ -1,8 +1,8 @@
-// angular
-import { Component, OnInit, OnDestroy } from '@angular/core';
+// @angular
+import { Component, OnInit } from '@angular/core';
 
 // services
-import {TaskService} from '../../services/task.service';
+import { TaskService } from '../../services/task.service';
 
 // entities
 import { Task } from '../../entities/task';
@@ -16,21 +16,26 @@ export class TasksComponent implements OnInit {
 
   // property ( get tasks from task service )
   get tasks() {
-    return this.srv.tasks;
+    return this.taskService.tasks;
   }
 
   // filter for show/hide tasks
   filter: String = 'all';
 
   constructor(
-    private srv: TaskService
+    private taskService: TaskService
   ) { }
 
   ngOnInit() {
-    this.srv.renderAllTasks();
+    this.taskService.renderAllTasks();
   }
 
   /** VIEW FLOW */
+
+  /** toggle allTasks checkbox */
+  isAllCompleted() {
+    return this.tasks.length === this.filterTasks(true).length;
+  }
 
   /** filter tasks by property isCompleted */
   filterTasks(isCompleted: Boolean) {
@@ -84,32 +89,33 @@ export class TasksComponent implements OnInit {
       name: name.trim(),
       isCompleted: false
     };
-    this.srv.addTask(task);
+    this.taskService.addTask(task);
   }
 
   /** toggle current task property isCompleted*/
   toggleTask(task: Task) {
-    this.srv.toggleTask(task);
+    this.taskService.toggleTask(task);
   }
 
   /** toggle all tasks property isCompleted */
-  toggleAllTasks(isCompleted: boolean) {
-    this.srv.toggleAllTasks(isCompleted);
+  toggleAllTasks() {
+    const isChecked = !this.isAllCompleted();
+    this.taskService.toggleAllTasks(isChecked);
   }
 
   /** remove current task */
   removeTask(task: Task) {
-    this.srv.removeTask(task);
+    this.taskService.removeTask(task);
   }
 
   updateTask(task: Task) {
-    this.srv.updateTask(task);
+    this.taskService.updateTask(task);
   }
 
   /** remove all completed tasks*/
   removeCompletedTasks() {
     const completedTasks = this.filterTasks(true);
-    this.srv.removeTasks(completedTasks);
+    this.taskService.removeTasks(completedTasks);
   }
 
 }

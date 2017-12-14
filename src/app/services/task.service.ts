@@ -1,4 +1,4 @@
-// angular
+// @angular
 import { Injectable } from '@angular/core';
 
 // entities
@@ -16,13 +16,12 @@ export class TaskService {
   public tasks;
 
   constructor(
-    private web: WebService
+    private webService: WebService
   ) {}
 
   /** render task list */
   renderAllTasks() {
-
-    this.web.getTasks().subscribe((data) => {
+    this.webService.getTasks().subscribe((data) => {
       const localTasks = JSON.parse(localStorage.getItem('taskManager') || '[]');
       if (localTasks.length) {
         this.tasks = localTasks;
@@ -36,41 +35,36 @@ export class TaskService {
   addTask(task: Task) {
     this.tasks.push(task);
     this.updateLocalStorage();
-    // TODO: Work with DB?
   }
 
   /** toggle current task property isComplete */
   toggleTask(task: Task) {
     task.isCompleted = !task.isCompleted;
     this.updateLocalStorage();
-    // TODO: Work with DB?
   }
 
   /** toggle all tasks property isComplete */
-  toggleAllTasks(isCompleted: boolean) {
-    this.tasks.forEach((task: Task) => task.isCompleted = isCompleted);
+  toggleAllTasks(isChecked) {
+    this.tasks.forEach((task: Task) => task.isCompleted = isChecked);
     this.updateLocalStorage();
-    // TODO: Work with DB?
   }
 
   /** remove current task */
   removeTask(removedTask: Task) {
     this.tasks.splice(this.tasks.indexOf(removedTask), 1);
     this.updateLocalStorage();
-    // TODO: Work with DB?
   }
 
   /** remove all completed tasks*/
   removeTasks(removedTasks: Task[]) {
     removedTasks.forEach((task: Task) => this.removeTask(task));
     this.updateLocalStorage();
-    // TODO: Work with DB?
   }
 
   /** edit current task name */
   updateTask(task: Task) {
+    // arg task for update task in db
     this.updateLocalStorage();
-    // TODO: Work with DB?
   }
 
   /** save tasks to local storage*/
