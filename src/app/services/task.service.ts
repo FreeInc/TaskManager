@@ -23,13 +23,12 @@ export class TaskService {
   renderAllTasks() {
 
     this.web.getTasks().subscribe((data) => {
-      let localTasks = JSON.parse(localStorage.getItem('taskManager') || '[]');
+      const localTasks = JSON.parse(localStorage.getItem('taskManager') || '[]');
       if (localTasks.length) {
         this.tasks = localTasks;
       } else {
         this.tasks = data;
       }
-      // TODO: write normal clever business logic
     });
   }
 
@@ -49,8 +48,8 @@ export class TaskService {
 
   /** toggle all tasks property isComplete */
   toggleAllTasks(isCompleted: boolean) {
-  	this.tasks.forEach((task: Task) => task.isCompleted = isCompleted);
-  	this.updateLocalStorage();
+    this.tasks.forEach((task: Task) => task.isCompleted = isCompleted);
+    this.updateLocalStorage();
     // TODO: Work with DB?
   }
 
@@ -74,7 +73,7 @@ export class TaskService {
     // TODO: Work with DB?
   }
 
-  /** save tasks to localstorage*/
+  /** save tasks to local storage*/
   updateLocalStorage() {
       localStorage.setItem('taskManager', JSON.stringify(this.tasks));
   }
