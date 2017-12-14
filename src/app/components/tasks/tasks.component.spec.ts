@@ -57,16 +57,11 @@ describe('TasklistComponent', () => {
     expect(spy).toHaveBeenCalledWith(task);
   });
 
-  it('call toggleAllTasks(true) => call taskService.toggleAllTasks(true)', () => {
+  it('call toggleAllTasks() => call taskService.toggleAllTasks(isChecked)', () => {
     const spy = spyOn(taskService, 'toggleAllTasks');
-    component.toggleAllTasks(true);
-    expect(spy).toHaveBeenCalledWith(true);
-  });
-
-  it('call toggleAllTasks(false) => call taskService.toggleAllTasks(false)', () => {
-    const spy = spyOn(taskService, 'toggleAllTasks');
-    component.toggleAllTasks(false);
-    expect(spy).toHaveBeenCalledWith(false);
+    const isChecked = !component.isAllCompleted();
+    component.toggleAllTasks();
+    expect(spy).toHaveBeenCalledWith(isChecked);
   });
 
   it('call showActiveTasks() => set filter value equal to "active"', () => {
