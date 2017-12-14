@@ -63,7 +63,7 @@ export class TaskService {
   /** remove all completed tasks*/
   removeTasks(removedTasks: Task[]) {
     removedTasks.forEach((task: Task) => this.removeTask(task));
-      this.updateLocalStorage();
+    this.updateLocalStorage();
     // TODO: Work with DB?
   }
 
