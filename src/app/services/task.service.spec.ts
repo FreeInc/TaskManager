@@ -1,9 +1,12 @@
+// @angular
 import { TestBed } from '@angular/core/testing';
 
+// services
 import { TaskService } from './task.service';
 import { WebService } from './web.service';
 
-import {Task} from '../entities/task';
+// models
+import {Task} from '../models/task.model';
 
 // mocks
 import { WebServiceMock } from '../mocks/mock.web.service';

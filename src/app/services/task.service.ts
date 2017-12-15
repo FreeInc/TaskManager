@@ -1,14 +1,12 @@
 // @angular
 import { Injectable } from '@angular/core';
 
-// entities
-import { Task } from '../entities/task';
-
 // services
 import { WebService } from './web.service';
 
+// models
+import { Task } from '../models/task.model';
 
-// Task Service
 @Injectable()
 export class TaskService {
 

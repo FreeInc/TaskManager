@@ -1,10 +1,15 @@
+// @angular
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+// components
 import { TaskComponent } from './task.component';
-import { Task } from '../../entities/task';
 
+// services
 import { TaskService } from '../../services/task.service';
+
+// models
+import { Task } from '../../models/task.model';
 
 // mocks
 import { TaskServiceMock } from '../../mocks/mock.task.service';

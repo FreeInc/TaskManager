@@ -1,7 +1,8 @@
+// @angular
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-// entities
-import { Task } from '../../entities/task';
+// models
+import { Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-task',
@@ -11,7 +12,7 @@ import { Task } from '../../entities/task';
 
 export class TaskComponent implements OnInit {
 
-  // edit mode for task name on/off
+  // edit mode for current task name on/off
   isEditMode: Boolean = false;
 
   // import task from tasks

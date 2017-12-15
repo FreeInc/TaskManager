@@ -1,4 +1,4 @@
-// angular
+// @angular
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,7 +14,6 @@ import { TasksComponent } from './components/tasks/tasks.component';
 import { TaskService } from './services/task.service';
 import { WebService } from './services/web.service';
 import { TaskComponent } from './components/task/task.component';
-
 
 @NgModule({
   declarations: [

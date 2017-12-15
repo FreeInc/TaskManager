@@ -1,9 +1,11 @@
+// @angular
 import { TestBed } from '@angular/core/testing';
 
+// services
 import { WebService } from './web.service';
 
-import { TASKS } from '../entities/storage';
-
+// models
+import { TASKS } from '../models/storage';
 
 describe('WebService', () => {
 

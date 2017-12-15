@@ -1,11 +1,15 @@
+// @angular
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-
+// components
 import { TasksComponent } from './tasks.component';
 import { TaskComponent } from '../task/task.component';
+
+// services
 import { TaskService } from '../../services/task.service';
 
-import { Task } from '../../entities/task';
+// models
+import { Task } from '../../models/task.model';
 
 // mocks
 import { TaskServiceMock } from '../../mocks/mock.task.service';
@@ -16,6 +20,7 @@ describe('TasklistComponent', () => {
   let fixture: ComponentFixture<TasksComponent>;
   let taskService: TaskService;
   let task: Task;
+
   const completedTask: Task = { name: 'task 1', isCompleted: true };
   const activeTask: Task = { name: 'task 2', isCompleted: false };
 

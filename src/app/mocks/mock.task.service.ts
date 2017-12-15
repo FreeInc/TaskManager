@@ -1,11 +1,9 @@
-// angular
+// @angular
 import { Injectable } from '@angular/core';
 
-// entities
-import { Task } from '../entities/task';
+// models
+import { Task } from '../models/task.model';
 
-
-// Task Service
 @Injectable()
 export class TaskServiceMock {
 

@@ -1,10 +1,9 @@
-// angular
+// @angular
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // components
 import {TasksComponent} from './components/tasks/tasks.component';
-
 
 // routes
 const routes: Routes = [
