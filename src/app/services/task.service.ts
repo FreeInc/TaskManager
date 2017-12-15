@@ -8,7 +8,6 @@ import { Task } from '../entities/task';
 import { WebService } from './web.service';
 
 
-
 // Task Service
 @Injectable()
 export class TaskService {
@@ -21,14 +20,14 @@ export class TaskService {
 
   /** render task list */
   renderAllTasks() {
-    this.webService.getTasks().subscribe((data) => {
-      const localTasks = JSON.parse(localStorage.getItem('taskManager') || '[]');
-      if (localTasks.length) {
-        this.tasks = localTasks;
-      } else {
+    const localTasks = JSON.parse(localStorage.getItem('taskManager') || '[]');
+    if (localTasks.length) {
+      this.tasks = localTasks;
+    } else {
+      this.webService.getTasks().subscribe((data) => {
         this.tasks = data;
-      }
-    });
+      });
+    }
   }
 
   /** add new task */

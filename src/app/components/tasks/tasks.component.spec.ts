@@ -59,9 +59,9 @@ describe('TasklistComponent', () => {
 
   it('call toggleAllTasks() => call taskService.toggleAllTasks(isChecked)', () => {
     const spy = spyOn(taskService, 'toggleAllTasks');
-    const isChecked = !component.isAllCompleted();
+    const isChecked = component.isAllCompleted();
     component.toggleAllTasks();
-    expect(spy).toHaveBeenCalledWith(isChecked);
+    expect(spy).toHaveBeenCalledWith(!isChecked);
   });
 
   it('call showActiveTasks() => set filter value equal to "active"', () => {

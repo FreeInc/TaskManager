@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 import { Task } from '../entities/task';
 
 
-
 // Task Service
 @Injectable()
 export class TaskServiceMock {
@@ -42,7 +41,7 @@ export class TaskServiceMock {
   /** edit current task name */
   updateTask(task: Task): void {}
 
-  /** save tasks to localstorage*/
+  /** save tasks to local storage*/
   updateLocalStorage(): void {}
 
 }
