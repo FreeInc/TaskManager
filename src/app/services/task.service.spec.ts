@@ -39,33 +39,20 @@ describe('TaskService', () => {
     expect(taskService).toBeTruthy();
   });
 
-  // // TODO: divide test
-  // xit('call renderAllTasks() => call WebService.getTasks() according to state of localstorage', () => {
-  //   const localData = JSON.parse(localStorage.getItem('taskManager') || '[]');
-  //   taskService.renderAllTasks();
-  //   if (localData.length) {
-  //     const spy = spyOn(webService, 'getTasks').and.stub();
-  //     expect(spy).toHaveBeenCalled();
-  //   } else {
-  //     const spy = spyOn(webService, 'getTasks').and.stub();
-  //     expect(spy).not.toHaveBeenCalled();
-  //   }
-  // });
-
   it('call renderAllTasks() => do not call WebService.getTasks() if local storage return array of tasks', () => {
     spyOn(localStorage, 'getItem').and.returnValue(JSON.stringify(tasks));
-    const spy = spyOn(webService, 'getTasks').and.stub();
+    const spy = spyOn(webService, 'getTasks').and.callThrough();
     taskService.renderAllTasks();
     expect(spy).not.toHaveBeenCalled();
 
   });
 
-  // fit('call renderAllTasks() => call WebService.getTasks() if local storage return empty array', () => {
-  //   spyOn(localStorage, 'getItem').and.returnValue('[]');
-  //   taskService.renderAllTasks();
-  //   const spy = spyOn(webService, 'getTasks').and.stub();
-  //   expect(spy).toHaveBeenCalled();
-  // });
+  it('call renderAllTasks() => call WebService.getTasks() if local storage return empty array', () => {
+    spyOn(localStorage, 'getItem').and.returnValue('[]');
+    const spy = spyOn(webService, 'getTasks').and.callThrough();
+    taskService.renderAllTasks();
+    expect(spy).toHaveBeenCalled();
+  });
 
   it('call addTask() => call TaskService.updateLocalStorage()', () => {
     const spy = spyOn(taskService, 'updateLocalStorage');

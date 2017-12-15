@@ -56,7 +56,7 @@ export class TasksComponent implements OnInit {
         return task.isCompleted;
 
       default:
-        return alert('WTF??? Where are you get this filter???');
+        return console.log('WTF???');
     }
   }
 

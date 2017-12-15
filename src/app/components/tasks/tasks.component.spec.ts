@@ -75,6 +75,14 @@ describe('TasklistComponent', () => {
     expect(filter).toBe('active');
   });
 
+  it('call showActiveTasks() => set filter value equal to "active"', () => {
+    const spy = spyOn(console, 'log');
+    component.filter = 'qqqqq';
+    fixture.detectChanges();
+    component.showActiveTasks();
+    expect(spy).toHaveBeenCalledWith('WTF???');
+  });
+
   it('call showActiveTasks() => active task pass the visibility checking', () => {
     component.showActiveTasks();
     const activeResult = component.isShow(activeTask);
