@@ -6,8 +6,8 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
 // entities
-import { Task } from '../entities/task';
-import { TASKS } from '../entities/storage';
+import { Task } from '../models/task.model';
+import { TASKS } from '../models/storage';
 
 
 // Data Access Service

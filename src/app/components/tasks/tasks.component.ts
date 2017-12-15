@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../services/task.service';
 
 // entities
-import { Task } from '../../entities/task';
+import { Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -74,7 +74,6 @@ export class TasksComponent implements OnInit {
   showCompletedTasks() {
     this.filter = 'completed';
   }
-
 
   /** MODEL FLOW */
 
