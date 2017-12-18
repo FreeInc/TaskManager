@@ -1,13 +1,8 @@
-// @angular
 import { Component, OnInit} from '@angular/core';
-
-// entities
-import { Task } from '../../entities/task';
-
-// @ngrx store
 import { Store } from '@ngrx/store';
-import { ADD_TASK, REMOVE_TASK, REMOVE_TASKS, UPDATE_TASK } from '../../reducers/tasks.reducer';
 
+import { ADD_TASK, REMOVE_TASK, REMOVE_TASKS, UPDATE_TASK } from '../../reducers/tasks.reducer';
+import { Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -16,16 +11,12 @@ import { ADD_TASK, REMOVE_TASK, REMOVE_TASKS, UPDATE_TASK } from '../../reducers
 })
 export class TasksComponent implements OnInit {
 
-  // list of task
   tasks: Task[];
-  // filter for show/hide tasks
   filter: String = 'all';
-
 
   constructor(
     private store: Store<any>
   ) {}
-
 
   ngOnInit() {
     this.store.select('tasks').subscribe((data: any) => {
@@ -33,12 +24,16 @@ export class TasksComponent implements OnInit {
     });
   }
 
-
   /** VIEW FLOW */
 
   /** filter tasks by property isCompleted */
   filterTasks(isCompleted: Boolean) {
     return this.tasks.filter((task: Task) => task.isCompleted === isCompleted);
+  }
+
+  /** toggle allTasks checkbox */
+  isAllCompleted() {
+    return this.tasks.length === this.filterTasks(true).length;
   }
 
   /** isShow */
@@ -55,7 +50,7 @@ export class TasksComponent implements OnInit {
         return task.isCompleted;
 
       default:
-        return alert('WTF??? Where are you get this filter???');
+        return console.log('WTF???');
     }
   }
 
@@ -74,22 +69,19 @@ export class TasksComponent implements OnInit {
     this.filter = 'completed';
   }
 
-
   /** MODEL FLOW */
 
   /** add new task */
   addTask(newTaskName: string) {
-
     const name = newTaskName.trim();
     if (!name) {
-      alert('Input not empty task name!');
+      console.log('Input not empty task name!');
       return;
     }
     const task = {
       name: name.trim(),
       isCompleted: false
     };
-
     this.store.dispatch({type: ADD_TASK, payload: task});
   }
 
@@ -100,9 +92,10 @@ export class TasksComponent implements OnInit {
   }
 
   /** toggle all tasks property isCompleted */
-  toggleAllTasks(isCompleted: boolean) {
+  toggleAllTasks() {
+    const isChecked = !this.isAllCompleted();
     this.tasks.forEach((task: Task) => {
-      task.isCompleted = isCompleted;
+      task.isCompleted = isChecked;
       this.store.dispatch({type: UPDATE_TASK, payload: task});
     });
   }

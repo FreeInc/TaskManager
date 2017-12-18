@@ -1,15 +1,13 @@
-// @angular
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-// entities
-import { Task } from '../../entities/task';
+import { Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.css']
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent {
 
   // edit mode for task name on/off
   isEditMode: Boolean = false;
@@ -23,9 +21,6 @@ export class TaskComponent implements OnInit {
   @Output() onUpdate = new EventEmitter<Task>();
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   /** toggle current task property isCompleted*/
   toggle() {

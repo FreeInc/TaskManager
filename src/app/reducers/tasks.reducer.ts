@@ -1,4 +1,4 @@
-import { Task } from '../entities/task';
+import { Task } from '../models/task.model';
 
 export const ADD_TASK = 'ADD_TASK';
 export const REMOVE_TASK = 'REMOVE_TASK';
@@ -12,25 +12,18 @@ const initialState = [
 
 export function tasks( state: Task[] = initialState, action ) {
 
-
   switch (action.type) {
-
     case ADD_TASK:
       return addTask(action.payload);
-
     case REMOVE_TASK:
       return removeTask(action.payload);
-
     case REMOVE_TASKS:
       return removeTasks(action.payload);
-
     case UPDATE_TASK:
       return updateTask(action.payload);
-
     default:
       return state;
   }
-
 
   function addTask(addedTask) {
     return [...state, addedTask];
