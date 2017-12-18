@@ -81,7 +81,7 @@ export class TasksComponent implements OnInit {
   addTask(newTaskName: string) {
     const name = newTaskName.trim();
     if (!name) {
-      alert('Input not empty task name!');
+      console.log('Input not empty task name!');
       return;
     }
     const task = {
@@ -107,6 +107,7 @@ export class TasksComponent implements OnInit {
     this.taskService.removeTask(task);
   }
 
+  /** update current task */
   updateTask(task: Task) {
     this.taskService.updateTask(task);
   }
@@ -118,4 +119,3 @@ export class TasksComponent implements OnInit {
   }
 
 }
-

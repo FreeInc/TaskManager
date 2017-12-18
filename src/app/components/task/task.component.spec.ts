@@ -61,7 +61,7 @@ describe('TaskComponent', () => {
     expect(component.isEditMode).toBeTruthy();
   });
 
-  it('call editTask() => create element input #edit', () => {
+  it('call editTask() => create element input#edit', () => {
     component.editTask();
     fixture.detectChanges();
     const inputEdit = fixture.debugElement.query(By.css('input#edit')).nativeElement;

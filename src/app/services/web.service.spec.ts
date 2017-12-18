@@ -18,7 +18,7 @@ describe('WebService', () => {
     webService = TestBed.get(WebService);
   });
 
-  it('call getTasks and return TASKS', () => {
+  it('call getTasks() => return TASKS', () => {
     webService.getTasks().subscribe((data) => {
       expect(data).toEqual(TASKS);
     });
