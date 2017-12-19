@@ -31,7 +31,7 @@ describe('TaskService', () => {
     taskService.tasks = tasks;
   });
 
-  it('call renderAllTasks() => do not call WebService.getTasks() if local storage return array of tasks', () => {
+  it('renderAllTasks() does not call the webService.getTasks() if the local storage returns an array of tasks', () => {
     spyOn(localStorage, 'getItem').and.returnValue(JSON.stringify(tasks));
 
     const spy = spyOn(webService, 'getTasks').and.callThrough();
@@ -40,7 +40,7 @@ describe('TaskService', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('call renderAllTasks() => call WebService.getTasks() if local storage return empty array', () => {
+  it('renderAllTasks() calls the webService.getTasks() if the local storage returns an empty array', () => {
     spyOn(localStorage, 'getItem').and.returnValue('[]');
     const spy = spyOn(webService, 'getTasks').and.callThrough();
 
@@ -49,7 +49,7 @@ describe('TaskService', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('call renderAllTasks() => call WebService.getTasks() if local storage return null', () => {
+  it('renderAllTasks() calls the webService.getTasks() if the local storage returns a null', () => {
     spyOn(localStorage, 'getItem').and.returnValue(null);
     const spy = spyOn(webService, 'getTasks').and.callThrough();
 
@@ -58,7 +58,7 @@ describe('TaskService', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('call addTask() => call TaskService.updateLocalStorage()', () => {
+  it('addTask() calls the taskService.updateLocalStorage()', () => {
     const spy = spyOn(taskService, 'updateLocalStorage').and.stub();
 
     taskService.addTask(tasks[0]);
@@ -66,7 +66,7 @@ describe('TaskService', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('call addTask() => add addedTask to tasks', () => {
+  it('addTask() adds the addedTask to the array of tasks', () => {
     const addedTask = {name: 'rrrr', isCompleted: false};
 
     taskService.addTask(addedTask);
@@ -74,7 +74,7 @@ describe('TaskService', () => {
     expect(taskService.tasks).toContain(addedTask);
   });
 
-  it('call toggleTask() => call TaskService.updateLocalStorage()', () => {
+  it('toggleTask() calls the taskService.updateLocalStorage()', () => {
     const spy = spyOn(taskService, 'updateLocalStorage').and.stub();
 
     taskService.toggleTask(tasks[0]);
@@ -82,7 +82,7 @@ describe('TaskService', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('call toggleTask() => toggle task.isCompleted to false', () => {
+  it('toggleTask() sets the task.isCompleted to the "false" if it was "true"', () => {
     tasks[0].isCompleted = true;
 
     taskService.toggleTask(tasks[0]);
@@ -90,7 +90,7 @@ describe('TaskService', () => {
     expect(tasks[0].isCompleted).toBe(false);
   });
 
-  it('call toggleTask() => toggle task.isCompleted to true', () => {
+  it('toggleTask() sets the task.isCompleted to "true" if it was "false"', () => {
     tasks[0].isCompleted = false;
 
     taskService.toggleTask(tasks[0]);
@@ -98,7 +98,7 @@ describe('TaskService', () => {
     expect(tasks[0].isCompleted).toBe(true);
   });
 
-  it('call toggleAllTask() => call TaskService.updateLocalStorage()', () => {
+  it('toggleAllTask() calls the TaskService.updateLocalStorage()', () => {
     const spy = spyOn(taskService, 'updateLocalStorage').and.stub();
 
     taskService.toggleAllTasks(true);
@@ -106,7 +106,7 @@ describe('TaskService', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('call toggleAllTask(true) => set all tasks isCompleted = true', () => {
+  it('toggleAllTask(true) sets the property "isCompleted" of all tasks equal to "true"', () => {
     taskService.toggleAllTasks(true);
     const _tasks =  taskService.tasks.filter((_task: Task) => {
       return _task.isCompleted === true;
@@ -115,7 +115,7 @@ describe('TaskService', () => {
     expect(_tasks.length).toBe(taskService.tasks.length);
   });
 
-  it('call toggleAllTask(false) => set all tasks isCompleted = false', () => {
+  it('toggleAllTask(false) sets the property "isCompleted" of all tasks equal to "false"', () => {
     taskService.toggleAllTasks(false);
     const _tasks =  taskService.tasks.filter((_task: Task) => {
       return _task.isCompleted === false;
@@ -124,7 +124,7 @@ describe('TaskService', () => {
     expect(_tasks.length).toBe(taskService.tasks.length);
   });
 
-  it('call removeTask() => remove removedTask from tasks', () => {
+  it('removeTask(removedTask) removes the "removedTask" from the array of tasks', () => {
     const removedTask: Task = taskService.tasks[1];
 
     taskService.removeTask(removedTask);
@@ -132,7 +132,7 @@ describe('TaskService', () => {
     expect(taskService.tasks).not.toContain(removedTask);
   });
 
-  it('call removeTask() => call TaskService.updateLocalStorage()', () => {
+  it('removeTask(removedTask) calls the taskService.updateLocalStorage()', () => {
     const spy = spyOn(taskService, 'updateLocalStorage').and.stub();
 
     taskService.removeTask(tasks[0]);
@@ -140,7 +140,7 @@ describe('TaskService', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('call removeTasks() => call TaskService.removeTask() with removedTasks', () => {
+  it('removeTasks(removedTasks) calls the taskService.removeTask() for all tasks from the array "removedTasks"', () => {
     const spy = spyOn(taskService, 'removeTask').and.stub();
     const removedTasks = [taskService.tasks[0], taskService.tasks[1]];
 
@@ -150,7 +150,7 @@ describe('TaskService', () => {
     expect(spy).toHaveBeenCalledWith(removedTasks[1]);
   });
 
-  it('call removeTasks() => call TaskService.updateLocalStorage()', () => {
+  it('removeTasks(removedTasks) calls the taskService.updateLocalStorage()', () => {
     const spy = spyOn(taskService, 'updateLocalStorage').and.stub();
 
     taskService.removeTasks(tasks);
@@ -158,7 +158,7 @@ describe('TaskService', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('call updateTask() => call TaskService.updateLocalStorage()', () => {
+  it('updateTask(updatedTask) calls the taskService.updateLocalStorage()', () => {
     const spy = spyOn(taskService, 'updateLocalStorage').and.stub();
 
     taskService.updateTask(tasks[0]);
@@ -166,7 +166,7 @@ describe('TaskService', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('call updateLocalStorage() => call localStorage.setItem()', () => {
+  it('updateLocalStorage() calls the localStorage.setItem() with the param "taskManager"', () => {
     const spy = spyOn(localStorage, 'setItem').and.stub();
 
     taskService.updateLocalStorage();

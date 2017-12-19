@@ -26,27 +26,27 @@ describe('TaskComponent', () => {
     jasmine.clock().uninstall();
   });
 
-  it('task label is present', () => {
+  it('task label is exist', () => {
     const lblName = fixture.debugElement.query(By.css('label'));
 
     expect(lblName.nativeElement).not.toBeNull();
   });
 
-  it('task label displays task name', () => {
+  it('task label displays the task name', () => {
     const lblName = fixture.debugElement.query(By.css('label'));
 
     expect(lblName.nativeElement.innerHTML).toEqual(task.name);
   });
 
-  it('call editTask() => set isEditMode = true', () => {
+  it('editTask() sets the isEditMode equal to the "true"', () => {
     component.isEditMode = false;
 
     component.editTask();
 
-    expect(component.isEditMode).toBeTruthy();
+    expect(component.isEditMode).toBe(true);
   });
 
-  it('call editTask() => create element input#edit', () => {
+  it('editTask() creates the element input with the id "edit"', () => {
     component.editTask();
     fixture.detectChanges();
     const inputEdit = fixture.debugElement.query(By.css('input#edit')).nativeElement;
@@ -54,7 +54,7 @@ describe('TaskComponent', () => {
     expect(inputEdit).toBeTruthy();
   });
 
-  it('call editTask() => set focus on element input #edit', () => {
+  it('editTask() sets the focus on the element input with id "edit"', () => {
     component.editTask();
     fixture.detectChanges();
     const inputEdit = fixture.debugElement.query(By.css('input#edit')).nativeElement;
@@ -64,15 +64,15 @@ describe('TaskComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('call editReset() => set isEditMode = false', () => {
+  it('editReset() sets the isEditMode equal to the "false"', () => {
     component.isEditMode = true;
 
     component.editReset();
 
-    expect(component.isEditMode).toBeFalsy();
+    expect(component.isEditMode).toBe(false);
   });
 
-  it('call toggle() => call onToggle emitter', () => {
+  it('toggle() calls the onToggle emitter', () => {
     const spy = spyOn(component.onToggle, 'emit').and.stub();
 
     component.toggle();
@@ -80,7 +80,7 @@ describe('TaskComponent', () => {
     expect(spy).toHaveBeenCalledWith(task);
   });
 
-  it('call remove() => call onRemove emitter', () => {
+  it('remove() calls the onRemove emitter', () => {
     const spy = spyOn(component.onRemove, 'emit').and.stub();
 
     component.remove();
@@ -88,7 +88,7 @@ describe('TaskComponent', () => {
     expect(spy).toHaveBeenCalledWith(task);
   });
 
-  it('call update() with empty name => do not call update emitter', () => {
+  it('update() with the empty name does not call the onUpdate emitter', () => {
     const spy = spyOn(component.onUpdate, 'emit').and.stub();
 
     component.update('');
@@ -96,7 +96,7 @@ describe('TaskComponent', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('call update() with same name => do not call update emitter', () => {
+  it('update() with the same name does not call the onUpdate emitter', () => {
     const spy = spyOn(component.onUpdate, 'emit').and.stub();
 
     component.update('testName');
@@ -104,7 +104,7 @@ describe('TaskComponent', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('call update() with correct name => call update emitter with correct name', () => {
+  it('update() with the correct param calls the onUpdate emitter with the same param', () => {
     const spy = spyOn(component.onUpdate, 'emit').and.stub();
 
     component.update('anotherName');

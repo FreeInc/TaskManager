@@ -14,7 +14,7 @@ describe('WebService', () => {
     webService = TestBed.get(WebService);
   });
 
-  it('function cally getTasks() => return TASKS', () => {
+  it('getTasks() returns TASKS', () => {
     webService.getTasks().subscribe((data) => {
       expect(data).toEqual(TASKS);
     });
