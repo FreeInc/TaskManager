@@ -1,10 +1,6 @@
-// @angular
 import { TestBed } from '@angular/core/testing';
 
-// services
 import { WebService } from './web.service';
-
-// models
 import { TASKS } from '../models/storage';
 
 describe('WebService', () => {
@@ -18,7 +14,7 @@ describe('WebService', () => {
     webService = TestBed.get(WebService);
   });
 
-  it('call getTasks() => return TASKS', () => {
+  it('function cally getTasks() => return TASKS', () => {
     webService.getTasks().subscribe((data) => {
       expect(data).toEqual(TASKS);
     });

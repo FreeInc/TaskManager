@@ -1,14 +1,11 @@
-// @angular
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-// components
-import {TasksComponent} from './components/tasks/tasks.component';
+import { TaskListComponent } from './components/tasklist/tasklist.component';
 
-// routes
 const routes: Routes = [
   { path: '', redirectTo: '/tasks', pathMatch: 'full' },
-  { path: 'tasks', component: TasksComponent },
+  { path: 'tasks', component: TaskListComponent },
   { path: '**', redirectTo: '/tasks' }
 ];
 
@@ -16,5 +13,4 @@ const routes: Routes = [
   imports: [ RouterModule.forRoot(routes) ],
   exports: [ RouterModule ]
 })
-
-export class AppRoutingModule {}
+export class AppRoutingModule { }
