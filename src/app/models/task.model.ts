@@ -1,5 +1,4 @@
-/** entity Task description*/
-export class Task {
+export interface Task {
   name: string;
   isCompleted: boolean;
 }

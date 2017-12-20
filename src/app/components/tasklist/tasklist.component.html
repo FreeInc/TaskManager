@@ -1,0 +1,38 @@
+<section class="todoapp">
+
+	<header class="header">
+		<h1>Task Manager</h1>
+		<input class="new-todo" placeholder="Maybe add new task?" autofocus="" (keyup.enter)="addTask(newtask.value); newtask.value=''" #newtask>
+	</header>
+
+	<section class="main">
+    <input class="toggle-all" type="checkbox" (click)="toggleAllTasks()" [checked]="isAllCompleted()">
+		<ul class="todo-list">
+			<li *ngFor="let task of tasks">
+				<app-task *ngIf="isShow(task)"
+					[currentTask]="task"
+					(onToggle)="toggleTask($event)"
+					(onRemove)="removeTask($event)"
+					(onUpdate)="updateTask($event)">
+				</app-task>
+			</li>
+		</ul>
+	</section>
+
+	<footer class="footer">
+		<span class="todo-count"><strong>{{filterTasks(false).length}}</strong> items left</span>
+    <ul class="filters">
+      <li>
+        <a [class.active]="filter === 'all'" (click)="showAllTasks()">All</a>
+      </li>
+      <li>
+        <a [class.active]="filter === 'active'" (click)="showActiveTasks()">Active</a>
+      </li>
+      <li>
+        <a [class.active]="filter === 'completed'" (click)="showCompletedTasks()">Completed</a>
+      </li>
+    </ul>
+		<button class="clear-completed" (click)="removeCompletedTasks()">Delete completed</button>
+	</footer>
+
+</section>

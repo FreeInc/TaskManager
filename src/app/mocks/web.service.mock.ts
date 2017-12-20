@@ -6,7 +6,7 @@ import { Task } from '../models/task.model';
 import { TASKS } from '../models/storage';
 
 @Injectable()
-export class WebService {
+export class WebServiceMock {
 
   constructor() {}
 
